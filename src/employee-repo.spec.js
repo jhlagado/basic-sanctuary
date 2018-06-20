@@ -1,8 +1,8 @@
+import { equals, Left, Right, show } from 'sanctuary';
 import { EmployeeRepository, getSupervisorName } from './employee-repo';
-import { equals, Either, Left, Right, show } from 'sanctuary';
 
 //    eq :: Any -> Any -> Undefined !
-const eq = expected => actual => {
+const eq = (expected) => (actual) => {
     expect(show(expected)).toEqual(show(actual));
     expect(equals(expected)(actual)).toBe(true);
 };
@@ -10,16 +10,16 @@ const eq = expected => actual => {
 const repo = new EmployeeRepository();
 
 test('should get the supervisor name for id', () => {
-    const supervisor = getSupervisorName(repo, Either.Right('1'));
+    const supervisor = getSupervisorName(repo, Right('1'));
     eq(supervisor)(Left('No supervisor'));
 });
 
 test('should get the supervisor name for id', () => {
-    const supervisor = getSupervisorName(repo, Either.Right('2'));
+    const supervisor = getSupervisorName(repo, Right('2'));
     eq(supervisor)(Right('John'));
 });
 
 test('should get the supervisor name for id', () => {
-    const supervisor = getSupervisorName(repo, Either.Right('3'));
+    const supervisor = getSupervisorName(repo, Right('3'));
     eq(supervisor)(Right('Jane'));
 });
